@@ -2,7 +2,7 @@
 MyPaint beta 0.2
 9/17/2021
 
-New Additions
+New Additions:
 *	You can save your masterpiece!
 *	You can also save as masterpiece!
 *	You can draw a line using the line drawer.
@@ -18,6 +18,9 @@ Known Issues:
 Upcoming additions:
 *	Being able to open up different projects at the same time.
 *	Being able to scribble on your images to create a better masterpiece.
+
+Links:
+*	https://github.com/thqmos/MyPaint
 
 
 
