@@ -1,0 +1,41 @@
+
+MyPaint beta 0.2
+9/17/2021
+
+New Additions
+*	You can save your masterpiece!
+*	You can also save as masterpiece!
+*	You can draw a line using the line drawer.
+*	Unintentional cropping of the image is no longer an issue.
+*	When opening an image/drawing on a blank canvas, scroll bars pop up for easier visibility.
+*	You can control the width of the line drawn using the slider.
+*	You can use the color chooser to impact the line drawn.
+*	Help and about options have been added under "Help."
+
+Known Issues:
+*	You still cannot load a new image on top of the image you first selected.
+
+Upcoming additions:
+*	Being able to open up different projects at the same time.
+*	Being able to scribble on your images to create a better masterpiece.
+
+
+
+*---------------- Old Versions -----------------*
+
+MyPaint beta 0.1
+09/10/2021
+
+New additions:
+*	You can now view an image from a file!
+*	You can now choose the image to be opened!
+*	You can utilize our menu bar to do a select few things!
+*	You can close the program without having to worry about your computer breaking!
+
+Known Issues:
+*	You cannot load a new image on top of the image you first selected.
+*	Image is not scaled and centered properly.
+
+Upcoming additions:
+*	Making it more fun by adding more options to customize your image.
+*	Being able to save your projects to any folder.

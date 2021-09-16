@@ -1,0 +1,17 @@
+* 	How to open an image from a file:         Go to File, then go to the drop-down menu, then click on Select Image.
+					          After that, you will be able to select your file from wherever using the file explorer window.
+					          Select your image and press Open, or double click your image.
+
+*	How to draw straight lines on your image: Go to Home, then go to the drop-down menu, then click on Line Drawer.
+                                                  After you do that, make sure to drag from the starting point of your line to the ending point.
+
+*	How to control the width of your line:    Use the slider right above the image to adjust the width of your line.
+
+*	How to control the color of your line:    Use the color chooser below the menu bar to pick your color.
+
+*	How to Save/Save As:                      Go to File, then go to the drop-down menu, then click on Save or Save As (doesn't matter what you click if it is your first time saving.
+			                          Use the file explorer window to save your masterpiece to wherever.
+			                          If you click on save as a second time, you will have to repeat the same process.
+			                          If you click on save for the second time, it will override the file which you saved.
+
+*	How to open About/Release Notes:          Go to Help, then click on About/Release Notes
