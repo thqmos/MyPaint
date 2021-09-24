@@ -1,6 +1,6 @@
 *	Application Name: MyPaint
 *	Creator: Thomas Hohnholt
-*	Application Version: Beta 0.2
+*	Application Version: Beta 0.3
 *	Application purpose: This application is one where you can mess around with images, 
-			     drawing straight lines on images at your own will, 
+			     drawing straight lines/shapes/doodles on images at your own will, 
 			     then you are able to save your work and come back to it later.

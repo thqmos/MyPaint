@@ -1,4 +1,31 @@
 
+MyPaint beta 0.3
+9/24/2021
+New Additions:
+*	You can scribble on your images!
+*	You can adjust the width and color of the lines and scribbles!
+*	You can draw shapes (rectangles, squares, ellipses, circles) with fill!
+*	You get warned before you close if you have not saved.
+*	Keyboard UI Controls are now a thing.
+*	You can open images in multiple file types.
+*	There is a text label describing the color.
+*	You can "grab" color from a specific area.
+*	You can resize the canvas (and the resulting image) and zoom in/out.
+*	You can add text to your masterpieces!
+*	You have an extra tab to practice your drawings!
+
+Known Issues:
+*	While the Help and About options are readable, they are not very pleasing to look at.
+
+Upcoming Additions:
+*	Being able to open up different projects at the same time via tabs.
+*	Undo/Redo
+
+Links:
+*	https://github.com/thqmos/MyPaint
+
+*---------------- Old Versions -----------------*
+
 MyPaint beta 0.2
 9/17/2021
 
@@ -23,9 +50,6 @@ Upcoming additions:
 Links:
 *	https://github.com/thqmos/MyPaint
 
-
-
-*---------------- Old Versions -----------------*
 
 MyPaint beta 0.1
 09/10/2021
