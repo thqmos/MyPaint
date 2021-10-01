@@ -1,0 +1,61 @@
+*       How to open an image from a file(CTL-O):  Go to File, then go to the drop-down menu, then click on Select Image.
+					          After that, you will be able to select your file from wherever using the file explorer window.
+					          Select your image and press Open, or double click your image.
+
+*	How to draw straight lines on your image: Click on Line Drawer, below the menu bar.
+                                                  After you do that, make sure to drag from the starting point of your line to the ending point. 
+						  Make sure to untoggle the button after you're done!
+
+*	How to control the width of the stroke of your drawings: 
+						  Use the slider right above the image to adjust the width of your line. This works for font sizing for the text tool as well.
+
+*	How to control the stroke of your drawings: 
+						  Use the color chooser below the menu bar to pick your color.
+
+*	How to control the fill of your drawings: Use the color chooser next to the fill check box. Make sure you have the check box checked if you want fill!
+
+*	How to Save/Save As(CTL-S/CTL-D):         Go to File, then go to the drop-down menu, then click on Save or Save As (doesn't matter what you click if it is your first time saving).
+			                          Use the file explorer window to save your masterpiece to wherever.
+			                          If you click on save as a second time, you will have to repeat the same process.
+			                          If you click on save for the second time, it will override the file which you saved.
+
+*	How to open About/Release Notes(CTL-A/CTL-R): Go to Help, then click on About/Release Notes.
+
+*	How to draw shapes: 			  Click on the shape tool that corresponds with what you want to draw (Rectangles, Ellipses, Squares, Circles, Polygons, or Rounded Rectangles).
+						  Click and drag from the starting point to the ending point (or center point to the vertex for polygon), similar to the line tool.
+						  Make sure to untoggle the button after you're done!
+
+*	How to zoom in/zoom out(CTL-0/CTL--): 	  Go to View, then go to the drop down menu, then click on zoom in/zoom out.
+
+*	How to resize the canvas:		  Go to view, then go to the drop down menu, then click on Resize Canvas.
+						  Put in the width and height desired, and click on "Resize!"
+
+*	How to use the pencil tool:		  Click on Pencil Tool, next to Line Drawer.
+						  This is freehand, so as soon as you click, you start drawing.
+					   	  Make sure to untoggle the button after you're done!
+
+*	How to use the color grabber:		  Click on the button called "Color Grabber".
+						  Click wherever you want to grab the color from.
+
+*	How to use the text tool:		  Click on the button called "Text Tool".
+						  Enter text in the text field next to the text tool button.
+				  	  	  Click wherever you want text. Color (stroke) and font sizing (slider) will work for this too!
+
+*	How to create new practice canvases:	  Go to File, then go to the drop-down menu, then click on "New Tab".
+
+*	How to close the application(CTL-Q):	  Go to File, then go to the drop-down menu, then click on "Close Without Saving."
+						  It will prompt you whether or not you want to go through with it.
+
+*	How to open the file menu:		  Hit Alt-F.
+
+*	How to undo/redo (CTL-Z for Undo): 	  Go to File, then go to then drop-down menu, then click on "Undo" or "Redo".
+
+*	How to specificy N for n-sided polygon:	  There is a text field with the number "5" next to the eraser tool. Put in whatever number you desire in that text field.
+
+*	How to use the eraser tool:		  Similar to the rectangle tool, you click and drag from the x and y coordinates of where you want the
+					   	  erasing to start to the x and y coordinates of where you want to end. This is located next to a text field.
+
+*	How to use the Select and Move tool:	  Similar to the rectangle tool, you click and drag from the x and y coordinates of where you want the
+					   	  selection to start to the x and y coordinates of where you want to end.
+						  Then, click where you want the selection to be pasted.
+						  This will erase the selection from the part of the image/canvas you took it from.
