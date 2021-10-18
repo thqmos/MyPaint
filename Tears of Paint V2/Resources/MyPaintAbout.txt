@@ -1,6 +1,6 @@
 *	Application Name: Tears of Paint
 *	Creator: Thomas Hohnholt
-*	Application Version: Beta 0.5
+*	Application Version: Beta 0.6
 *	Application purpose: This application is one where you can mess around with images. 
 			     You are able to edit and make images at your own will, 
 			     then you are able to save your work and come back to it later.

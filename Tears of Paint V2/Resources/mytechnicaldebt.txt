@@ -1,0 +1,12 @@
+Thomas' Technical Debt
+
+*	For a while, there was an issue where the select and move only worked once per program launch. This issue has now been resolved.
+	How was this solved? Select and move was converted into two separate buttons, "Cut" and "Paste".
+
+*	After you did the select and move the one time, the color grabber would not work. This issue has now been resolved.
+	How was this solved? Select and move was converted into two separate buttons, "Cut" and "Paste".
+
+*	Layout has been modified slightly so that everything is slightly more organized.
+
+*	Unit tests finally do not return errors related to the internal graphics.
+	How was this solved? The application has to run for 10 seconds, as supposedly this initializes the graphics.

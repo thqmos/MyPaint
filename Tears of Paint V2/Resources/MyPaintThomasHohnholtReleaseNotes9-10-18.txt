@@ -1,4 +1,24 @@
 
+Tears of Paint beta 0.6
+10/18/2021
+New additions:
+*	All of the user's actions are now logged in order to formulate a better user experience!
+*	You can now copy selections and paste them (as opposed to cutting. You can still cut too).
+*	There is an indication of which tool is in use!
+*	Rainbow Fun Mode, which makes every pixel a random color, has now been implemented.
+*	More JavaDocs have been added to improve software code quality.
+
+Known Issues:
+*	While you can make tabs, all actions only work on the latest tab. If that tab is deleted, good luck trying to do anything at all.
+
+Upcoming Additions:
+*	The application's functionality is good enough where it does not need any more features. However, the you can submit feedback on my GitHub.
+
+Links:
+*	https://github.com/thqmos/MyPaint
+
+
+*---------------- Old Versions -----------------*
 Tears of Paint beta 0.5
 10/8/2021
 New additions:
@@ -22,7 +42,6 @@ Upcoming Additions:
 Links:
 *	https://github.com/thqmos/MyPaint
 
-*---------------- Old Versions -----------------*
 Tears of Paint beta 0.4
 10/1/2021
 New Additions:

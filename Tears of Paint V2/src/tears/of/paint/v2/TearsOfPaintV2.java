@@ -30,7 +30,11 @@ public class TearsOfPaintV2 extends Application{
     protected static Stage stage;
     protected static Scene scene;
     
-    //Launching of the software, this method passes a frame to it
+    /**
+     * This method is what fires up the application.
+     * @param frame, this is where the PaintMenuBar, the PaintToolBar, and etc. show up.
+     * @throws Exception, this deals with the question of what if something goes wrong in the firing up process.
+     */
     public void start(Stage frame) throws Exception{
         
         TearsOfPaintV2.stage = frame;
@@ -320,6 +324,10 @@ public class TearsOfPaintV2 extends Application{
         });
     }
     
+    /**
+     * This is what runs at run time, this calls the start method from earlier
+     * @param args, an array of strings is passed to the main function, this is important for the program's functionality.
+     */
     public static void main(String[] args) {
         Application.launch(args);
     }

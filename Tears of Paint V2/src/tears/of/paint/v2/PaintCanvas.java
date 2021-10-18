@@ -2,8 +2,16 @@
 package tears.of.paint.v2;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import static java.lang.Integer.parseInt;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 import java.util.Stack;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -15,6 +23,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
+import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
@@ -40,7 +49,19 @@ public class PaintCanvas extends Canvas{
     protected static double zoom;
     private Scale scale;
     private int clicked;
+    private Image nextSelect;
     
+    //Logging stuff
+    protected static String currentTool;
+    protected static Logger log;
+    protected int time;
+    
+    //Rainbow fun mode
+    protected PixelWriter pw;
+    
+    /**
+     * THE constructor for the PaintCanvas.
+     */
     public PaintCanvas(){
         super();
         graphic = this.getGraphicsContext2D();
@@ -56,9 +77,16 @@ public class PaintCanvas extends Canvas{
         zoom = 1;
         scale = null;
         clicked = 0;
+        nextSelect = null;
+        log = Logger.getLogger(this.getClass().getName());
+        pw = graphic.getPixelWriter();
         
-        //This is how the color grabber works
+        
+        
+        //What if the mouse is clicked?
         this.setOnMouseClicked(eh -> {
+            
+            //This is how the color grabber works
             if (PaintToolBar.colorGrabber.isSelected() == true) {
                 WritableImage writableImage = new WritableImage((int) this.getWidth(), (int) this.getHeight());
                 this.snapshot(null, writableImage);
@@ -66,6 +94,12 @@ public class PaintCanvas extends Canvas{
                 PaintToolBar.colorPicker.setValue(pr.getColor((int) eh.getX(), (int) eh.getY()));
                 PaintToolBar.colorGrabber.setSelected(false);
             }
+            //What if the paste tool is selected?
+            else if (PaintToolBar.Paste.isSelected()){
+                graphic.drawImage(nextSelect, eh.getX(), eh.getY());
+                addUndo(undoHistory, this);
+            }
+            
         });
         
         this.setOnMousePressed(eh -> {
@@ -137,12 +171,19 @@ public class PaintCanvas extends Canvas{
                 y1 = eh.getY();
                 addUndo(undoHistory, this);
             }
-            //What if the move tool is selected?
-            else if (PaintToolBar.MovePaste.isSelected() == true){
+            //What if the cut tool is selected?
+            else if (PaintToolBar.Cut.isSelected() == true){
                 x1 = eh.getX();
                 y1 = eh.getY();
                 addUndo(undoHistory, this);
             }
+            //What if the copy tool is selected?
+            else if (PaintToolBar.Copy.isSelected() == true){
+                x1 = eh.getX();
+                y1 = eh.getY();
+                addUndo(undoHistory, this);
+            }
+            
         });
         
         //What if the mouse is dragged?
@@ -358,7 +399,7 @@ public class PaintCanvas extends Canvas{
                     double rectheight = y1 - y2;
                     graphic.fillRect(x1, y2, rectwidth, rectheight);
                     //What if it goes down and to the left?
-                } else if (x1 > x2 && y2 > y2) {
+                } else if (x1 > x2 && y2 > y1) {
                     double rectwidth = x1 - x2;
                     double rectheight = y2 - y1;
                     graphic.fillRect(x2, y1, rectwidth, rectheight);
@@ -400,6 +441,82 @@ public class PaintCanvas extends Canvas{
                     graphic.strokePolygon(xarr, yarr, sides);
                 }
                 
+            }
+            
+            //What if the cut tool is selected
+            else if (PaintToolBar.Cut.isSelected()){
+                Image image1 = (Image)undoHistory.peek();
+                graphic.drawImage(image1, 0, 0);
+                x2 = eh.getX();
+                y2 = eh.getY();
+                graphic.setStroke(Color.BLACK);
+                graphic.setLineWidth(0.25);
+                graphic.setFill(Color.WHITE);
+                
+                //What if it goes down and to the right
+                if (x2 > x1 && y2 > y1) {
+                    double rectwidth = x2 - x1;
+                    double rectheight = y2 - y1;
+                    graphic.strokeRect(x1, y1, rectwidth, rectheight);
+            }
+                //What if it goes up and to the right?
+                else if (x2 > x1 && y1 > y2){
+                    double rectwidth = x2 - x1;
+                    double rectheight = y1 - y2;
+                    graphic.strokeRect(x1, y2, rectwidth, rectheight);
+                }
+                
+                //What if it goes down and to the left?
+                else if (x1 > x2 && y2 > y1){
+                    double rectwidth = x1 - x2;
+                    double rectheight = y2 - y1;
+                    graphic.strokeRect(x2, y1, rectwidth, rectheight);
+                }
+                
+                //What if it goes up and to the left?
+                else{
+                    double rectwidth = x1 - x2;
+                    double rectheight = y1 - y2;
+                    graphic.strokeRect(x2, y2, rectwidth, rectheight);
+                }
+            }
+            
+            //What if the copy tool is selected
+            else if (PaintToolBar.Copy.isSelected()){
+                Image image1 = (Image)undoHistory.peek();
+                graphic.drawImage(image1, 0, 0);
+                x2 = eh.getX();
+                y2 = eh.getY();
+                graphic.setStroke(Color.BLACK);
+                graphic.setLineWidth(0.25);
+                graphic.setFill(Color.WHITE);
+                
+                //What if it goes down and to the right
+                if (x2 > x1 && y2 > y1) {
+                    double rectwidth = x2 - x1;
+                    double rectheight = y2 - y1;
+                    graphic.strokeRect(x1, y1, rectwidth, rectheight);
+            }
+                //What if it goes up and to the right?
+                else if (x2 > x1 && y1 > y2){
+                    double rectwidth = x2 - x1;
+                    double rectheight = y1 - y2;
+                    graphic.strokeRect(x1, y2, rectwidth, rectheight);
+                }
+                
+                //What if it goes down and to the left?
+                else if (x1 > x2 && y2 > y1){
+                    double rectwidth = x1 - x2;
+                    double rectheight = y2 - y1;
+                    graphic.strokeRect(x2, y1, rectwidth, rectheight);
+                }
+                
+                //What if it goes up and to the left?
+                else{
+                    double rectwidth = x1 - x2;
+                    double rectheight = y1 - y2;
+                    graphic.strokeRect(x2, y2, rectwidth, rectheight);
+                }
             }
             
         });
@@ -594,7 +711,7 @@ public class PaintCanvas extends Canvas{
                 if (x2 > x1 && y2 > y1) {
                     double rectwidth = x2 - x1;
                     double rectheight = y2 - y1;
-                    graphic.fillRect(x1, y2, rectwidth, rectheight);
+                    graphic.fillRect(x1, y1, rectwidth, rectheight);
                     //What if it goes up and to the right?
                 } else if (x2 > x1 && y1 > y2) {
                     double rectwidth = x2 - x1;
@@ -642,8 +759,8 @@ public class PaintCanvas extends Canvas{
                 }
                 
             }
-            //What if the move tool is selected
-            else if (PaintToolBar.MovePaste.isSelected() == true){
+            //What if the cut tool is selected
+            else if (PaintToolBar.Cut.isSelected() == true){
                 x2 = eh.getX();
                 y2 = eh.getY();
                 graphic.setStroke(Color.BLACK);
@@ -660,23 +777,8 @@ public class PaintCanvas extends Canvas{
                     BufferedImage image = SwingFXUtils.fromFXImage(writable, null);
                     BufferedImage subImage = new BufferedImage((int) rectwidth, (int) rectheight, BufferedImage.OPAQUE);
                     subImage.createGraphics().drawImage(image.getSubimage((int) x1, (int) y1, (int) rectwidth, (int) rectheight), 0, 0, null);
-                    Image w = SwingFXUtils.toFXImage(subImage, null);
+                    nextSelect = SwingFXUtils.toFXImage(subImage, null);
                     graphic.fillRect(x1, y1, rectwidth, rectheight);
-                    this.setOnMouseClicked(e -> {
-                        if (clicked == 0){
-                            clicked++;
-                        }
-                        else if (clicked == 1) {
-                            graphic.drawImage(w, e.getX(), e.getY());
-                            clicked++;
-                        }
-                        else{
-                            w.cancel();
-                            System.gc();
-                            PaintToolBar.MovePaste.setSelected(false);
-                            
-                        }
-                    });
 
                     //What if it goes up and to the right?
                 } else if (x2 > x1 && y1 > y2) {
@@ -688,24 +790,8 @@ public class PaintCanvas extends Canvas{
                     BufferedImage image = SwingFXUtils.fromFXImage(writable, null);
                     BufferedImage subImage = new BufferedImage((int) rectwidth, (int) rectheight, BufferedImage.OPAQUE);
                     subImage.createGraphics().drawImage(image.getSubimage((int) x1, (int) y2, (int) rectwidth, (int) rectheight), 0, 0, null);
-                    Image w = SwingFXUtils.toFXImage(subImage, null);
+                    nextSelect = SwingFXUtils.toFXImage(subImage, null);
                     graphic.fillRect(x1, y2, rectwidth, rectheight);
-                    this.setOnMouseClicked(e -> {
-                        if (clicked == 0){
-                            clicked++;
-                        }
-                        else if (clicked == 1) {
-                            graphic.drawImage(w, e.getX(), e.getY());
-                            clicked++;
-                        }
-                        else{
-                            w.cancel();
-                            System.gc();
-                            PaintToolBar.MovePaste.setSelected(false);
-                            
-                        }
-                    });
-
                     
                     //What if it goes down and to the left?
                 } else if (x1 > x2 && y2 > y1) {
@@ -717,23 +803,8 @@ public class PaintCanvas extends Canvas{
                     BufferedImage image = SwingFXUtils.fromFXImage(writable, null);
                     BufferedImage subImage = new BufferedImage((int) rectwidth, (int) rectheight, BufferedImage.OPAQUE);
                     subImage.createGraphics().drawImage(image.getSubimage((int) x2, (int) y1, (int) rectwidth, (int) rectheight), 0, 0, null);
-                    Image w = SwingFXUtils.toFXImage(subImage, null);
+                    nextSelect = SwingFXUtils.toFXImage(subImage, null);
                     graphic.fillRect(x2, y1, rectwidth, rectheight);
-                    this.setOnMouseClicked(e -> {
-                        if (clicked == 0){
-                            clicked++;
-                        }
-                        else if (clicked == 1) {
-                            graphic.drawImage(w, e.getX(), e.getY());
-                            clicked++;
-                        }
-                        else{
-                            w.cancel();
-                            System.gc();
-                            PaintToolBar.MovePaste.setSelected(false);
-                            
-                        }
-                    });
 
                     //What if it goes up and to the left?
                 } else if (x1 > x2 && y1 > y2){
@@ -746,25 +817,69 @@ public class PaintCanvas extends Canvas{
                     BufferedImage image = SwingFXUtils.fromFXImage(writable, null);
                     BufferedImage subImage = new BufferedImage((int) rectw, (int) recth, BufferedImage.OPAQUE);
                     subImage.createGraphics().drawImage(image.getSubimage((int) x2, (int) y2, (int) rectw, (int) recth), 0, 0, null);
-                    Image w = SwingFXUtils.toFXImage(subImage, null);
+                    nextSelect = SwingFXUtils.toFXImage(subImage, null);
                     graphic.fillRect(x2, y2, rectw, recth);
-                    
-                    this.setOnMouseClicked(e -> {
-                        if (clicked == 0){
-                            clicked++;
-                        }
-                        else if (clicked == 1) {
-                            graphic.drawImage(w, e.getX(), e.getY());
-                            clicked++;
-                        }
-                        else{
-                            w.cancel();
-                            System.gc();
-                            PaintToolBar.MovePaste.setSelected(false);
-                            
-                        }
-                    });
 
+                }
+                
+            }
+            
+            //What if the copy tool is selected?
+            else if (PaintToolBar.Copy.isSelected() == true){
+                x2 = eh.getX();
+                y2 = eh.getY();
+                graphic.setStroke(Color.BLACK);
+                graphic.setLineWidth(1);
+                graphic.setFill(Color.WHITE);
+                
+                //What if it goes down and to the right?
+                if (x2 > x1 && y2 > y1) {
+                    double rectwidth = x2 - x1;
+                    double rectheight = y2 - y1;
+                    
+                    //Here we get the image to be drawn
+                    Image writable = this.snapshot(null, null);
+                    BufferedImage image = SwingFXUtils.fromFXImage(writable, null);
+                    BufferedImage subImage = new BufferedImage((int) rectwidth, (int) rectheight, BufferedImage.OPAQUE);
+                    subImage.createGraphics().drawImage(image.getSubimage((int) x1, (int) y1, (int) rectwidth, (int) rectheight), 0, 0, null);
+                    nextSelect = SwingFXUtils.toFXImage(subImage, null);
+
+                    //What if it goes up and to the right?
+                } else if (x2 > x1 && y1 > y2) {
+                    double rectwidth = x2 - x1;
+                    double rectheight = y1 - y2;
+                    
+                    //Here we get the image to be drawn
+                    Image writable = this.snapshot(null, null);
+                    BufferedImage image = SwingFXUtils.fromFXImage(writable, null);
+                    BufferedImage subImage = new BufferedImage((int) rectwidth, (int) rectheight, BufferedImage.OPAQUE);
+                    subImage.createGraphics().drawImage(image.getSubimage((int) x1, (int) y2, (int) rectwidth, (int) rectheight), 0, 0, null);
+                    nextSelect = SwingFXUtils.toFXImage(subImage, null);
+                    
+                    //What if it goes down and to the left?
+                } else if (x1 > x2 && y2 > y1) {
+                    double rectwidth = x1 - x2;
+                    double rectheight = y2 - y1;
+                    
+                    //Here we get the image to be drawn
+                    Image writable = this.snapshot(null, null);
+                    BufferedImage image = SwingFXUtils.fromFXImage(writable, null);
+                    BufferedImage subImage = new BufferedImage((int) rectwidth, (int) rectheight, BufferedImage.OPAQUE);
+                    subImage.createGraphics().drawImage(image.getSubimage((int) x2, (int) y1, (int) rectwidth, (int) rectheight), 0, 0, null);
+                    nextSelect = SwingFXUtils.toFXImage(subImage, null);
+
+                    //What if it goes up and to the left?
+                } else if (x1 > x2 && y1 > y2){
+                    double rectw = x1 - x2;
+                    double recth = y1 - y2;
+                    System.out.println(rectw);
+                    
+                    //Here we get the image to be drawn
+                    Image writable = this.snapshot(null, null);
+                    BufferedImage image = SwingFXUtils.fromFXImage(writable, null);
+                    BufferedImage subImage = new BufferedImage((int) rectw, (int) recth, BufferedImage.OPAQUE);
+                    subImage.createGraphics().drawImage(image.getSubimage((int) x2, (int) y2, (int) rectw, (int) recth), 0, 0, null);
+                    nextSelect = SwingFXUtils.toFXImage(subImage, null);
                 }
                 
             }
@@ -779,6 +894,7 @@ public class PaintCanvas extends Canvas{
                 Image randomI = undoHistory.pop();
                 graphic.drawImage(randomI, 0, 0);
                 redoHistory.push(neww);
+                logAction(" Something was undone");
             }
         });
         
@@ -792,6 +908,7 @@ public class PaintCanvas extends Canvas{
                 Image randomI = redoHistory.pop();
                 graphic.drawImage(randomI, 0, 0);
                 undoHistory.push(neww);
+                logAction(" Something was redone.");
             }
         });
         
@@ -806,6 +923,7 @@ public class PaintCanvas extends Canvas{
             zoom -= 0.1;
             scale = new Scale(zoom, zoom, 0, 0);
             this.getTransforms().add(scale);
+            logAction(" The user zoomed in.");
         });
         
         //This is how we zoom in
@@ -814,6 +932,7 @@ public class PaintCanvas extends Canvas{
             zoom += 0.1;
             scale = new Scale(zoom, zoom, 0, 0);
             this.getTransforms().add(scale);
+            logAction(" The user zoomed out.");
         });
         
         //This is how we resize
@@ -842,6 +961,7 @@ public class PaintCanvas extends Canvas{
                    graphic.drawImage(writableImage, 0, 0, this.getWidth(), this.getHeight());
                    resizeStage.close();
                    PaintTabs.change = true;
+                   logAction(" The user resized the canvas.");
                }
                catch(Exception L){
                    System.out.println("Something went wrong...");
@@ -849,6 +969,24 @@ public class PaintCanvas extends Canvas{
                
             });
             
+        });
+        
+        //Implementation of rainbow fun mode
+        PaintMenuBar.RainbowFun.setOnAction(eh -> {
+            //Random rgb values, needed for rainbow fun mode
+            Random random = new Random();
+            for(int i = 0; i < this.getWidth(); i++){
+                for(int j = 0; j < this.getHeight(); j++){
+                    float r = random.nextFloat();
+                    float g = random.nextFloat();
+                    float b = random.nextFloat();
+                    r = r*255;
+                    b = b*255;
+                    g = g*255;
+                    pw.setColor(i, j, Color.rgb((int) r, (int) g, (int) b));
+                }
+            }
+            logAction(" Rainbow Fun Mode initiated.");
         });
         
         PaintMenuBar.ZoomIn.setAccelerator(new KeyCodeCombination(KeyCode.I, KeyCombination.CONTROL_DOWN));
@@ -966,4 +1104,38 @@ public class PaintCanvas extends Canvas{
     public GraphicsContext getGC(){
         return graphic;
     }
+    
+    /**
+     * This is the method which logs the actions being done
+     * @param action, this is the string that describes what is being used/clicked.
+     */
+    public void logAction(String action){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+        Date date = new Date(System.currentTimeMillis());
+        formatter.format(date);
+        File fileToBeModified = new File("Resources\\MyPaintLogging.log");
+        FileHandler fh;
+        try {
+            fh = new FileHandler("Resources\\MyPaintLogging.log");
+            log.addHandler(fh);
+            SimpleFormatter sf = new SimpleFormatter();  
+            fh.setFormatter(sf);
+            if (currentTool != action) {
+                currentTool = action;
+                log.info(date + ":" + currentTool);
+            }
+            
+        } catch (SecurityException e) {
+            System.out.println("Something went wrong...");
+        } catch (IOException L) {
+            System.out.println("Something went wrong...");
+        }
+        catch (NullPointerException yikes){
+            System.out.println("Something went wrong...");
+        }
+
+        
+        
+    }
+    
 }

@@ -22,6 +22,9 @@ public class Autosave extends TimerTask{
     private File outputf;
     private int i;
     
+    /**
+     * This is THE constructor for the auto save class.
+     */
     public Autosave(){
         Platform.runLater(() -> {
             t = parseInt(PaintToolBar.autotext.getText());
@@ -30,16 +33,19 @@ public class Autosave extends TimerTask{
     }
     
     @Override
+    /**
+     * This is what all happens during the auto saving process.
+     */
     public void run(){
         
         //Updating the label
         Platform.runLater(() -> {
-        PaintToolBar.update = new Label("Autosave activates in " + t + " seconds!");
-        PaintToolBar.textlayout3.getChildren().setAll(PaintToolBar.update, PaintToolBar.autotext);
-        if (PaintToolBar.check1.isSelected() == false) {
-            update.setVisible(false);
-        } else {
-            update.setVisible(true);
+            PaintToolBar.update = new Label("Autosave activates in " + t + " seconds!");
+            PaintToolBar.textlayout3.getChildren().setAll(PaintToolBar.update, PaintToolBar.autotext);
+            if (PaintToolBar.check1.isSelected() == false) {
+                update.setVisible(false);
+            } else {
+                update.setVisible(true);
             }
         });
         t--;

@@ -34,7 +34,7 @@ Make sure to untoggle the button after you're done!
 *	How to zoom in/zoom out(CTL-I/CTL-P): 	  
 Go to View, then go to the drop down menu, then click on zoom in/zoom out.
 
-*	How to resize the canvas:		  
+*	How to resize the canvas(CTL-E):		  
 Go to view, then go to the drop down menu, then click on Resize Canvas.
 Put in the width and height desired, and click on "Resize!"
 
@@ -62,11 +62,11 @@ It will prompt you whether or not you want to go through with it.
 *	How to open the file menu:		  
 Hit Alt-F.
 
-*	How to undo/redo (CTL-Z for Undo): 	  
+*	How to undo/redo (CTL-Z/CTL-Y): 	  
 Go to File, then go to then drop-down menu, then click on "Undo" or "Redo".
 
 *	How to specificy N for n-sided polygon:	  
-There is a text field with the number "5" next to the eraser tool. Put in whatever number you desire in that text field.
+There is a text field with the number "5" next to "No. of sides for your polygon!". Put in whatever number you desire in that text field.
 
 *	How to use the eraser tool:		  
 Similar to the rectangle tool, you click and drag from the x and y coordinates of where you want the
@@ -75,8 +75,23 @@ erasing to start to the x and y coordinates of where you want to end. This is lo
 *	How to use the Select and Move tool:	  
 Similar to the rectangle tool, you click and drag from the x and y coordinates of where you want the					   	  
 selection to start to the x and y coordinates of where you want to end.						 
-Then, click where you want the selection to be pasted.						  
+Then, 						  
+
+
+*	How to use the Cut Tool:
+It is under "Miscellaneous Tools".
+Similar to the rectangle tool, you click and drag from the x and y coordinates of where you want the					   	  
+selection to start to the x and y coordinates of where you want to end.
 This will erase the selection from the part of the image/canvas you took it from.
+
+*	How to use the Copy Tool:
+It is under "Miscellaneous Tools".
+Similar to the rectangle tool, you click and drag from the x and y coordinates of where you want the					   	  
+selection to start to the x and y coordinates of where you want to end.
+
+*	How to use the Paste Tool:
+It is under "Miscellaneous Tools".
+Click where you want your prior selection (either via cut or copy) to be pasted.
 
 *	How to disable the autosave timer view:	  
 Uncheck the check box that says "Disable countdown view."
@@ -84,3 +99,11 @@ Uncheck the check box that says "Disable countdown view."
 *	How to change how many seconds autosave happens:
 There is a text field with a number above the countdown. Enter the amount of time, in seconds, that you want autosave to occur.
 Then click the button labeled, "Change Time". This will have a stopwatch icon.
+
+*	How to initiate Rainbow Fun Mode:
+Go to the "Home" Menu in the menu bar, then click on "Rainbow Fun Mode".
+It may take a few seconds depending on the size of the image/canvas you are working with.
+
+*	How to see which tool is in use:
+There is a label under the color pickers. That label should tell you what tool is in use.
+If you need further verification, whichever button is toggled should tell you that that tool is in use.

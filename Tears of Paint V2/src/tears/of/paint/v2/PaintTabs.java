@@ -4,8 +4,12 @@ package tears.of.paint.v2;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -25,7 +29,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
-import org.junit.*;
+import tears.of.paint.v2.*;
+import static tears.of.paint.v2.PaintCanvas.currentTool;
+import static tears.of.paint.v2.PaintCanvas.log;
 
 
 public class PaintTabs extends Tab{
@@ -40,6 +46,9 @@ public class PaintTabs extends Tab{
     private File saveFile;
     
     
+    /**
+     * THE constructor for PaintTabs.
+     */
     public PaintTabs(){
         super();
         change = false;
@@ -63,6 +72,7 @@ public class PaintTabs extends Tab{
                 System.out.println("Something went wrong...");
             }
             path = selectedFile;
+            logAction(" Image opened.");
             updateTabTitle();
         });
         
@@ -87,10 +97,12 @@ public class PaintTabs extends Tab{
                         RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
                         ImageIO.write(renderedImage, "png", saveFile);
                         change = false;
+                        logAction(" Image saved.");
                     }
                     catch (IOException exp){
                         Logger.getLogger(TearsOfPaintV2.class.getName()).log(Level.SEVERE, null, exp);
                     }
+                    
                 }
             }
         });
@@ -191,13 +203,16 @@ public class PaintTabs extends Tab{
                     closureStage.close();
                 });
             }
+            logAction(" Application closed.");
         });
         
         PaintMenuBar.CloseWS.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
         
     }
     
-    //This method sets up the tabs. This does not need to be called outside of this file
+    /**
+     * This method sets up the tabs. This does not need to be called outside of this file
+     */
     private void setup(){
         //Image file types, creation and implementation of the file chooser
         fileChooser = new FileChooser();
@@ -248,6 +263,7 @@ public class PaintTabs extends Tab{
             Logger.getLogger(TearsOfPaintV2.class.getName()).log(Level.SEVERE, null, ex);
         }
         saveFile = file;
+        logAction(" Image saved as.");
 
     }
     
@@ -267,6 +283,38 @@ public class PaintTabs extends Tab{
         return title;
     }
     
+    /**
+     * This is the method which logs the actions being done
+     * @param action, this is the string that describes what is being used/clicked.
+     */
+    public void logAction(String action){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+        Date date = new Date(System.currentTimeMillis());
+        formatter.format(date);
+        File fileToBeModified = new File("Resources\\MyPaintLogging.log");
+        FileHandler fh;
+        try {
+            fh = new FileHandler("Resources\\MyPaintLogging.log");
+            log.addHandler(fh);
+            SimpleFormatter sf = new SimpleFormatter();  
+            fh.setFormatter(sf);
+            if (currentTool != action) {
+                currentTool = action;
+                log.info(date + ":" + currentTool);
+            }
+            
+        } catch (SecurityException e) {
+            System.out.println("Something went wrong...");
+        } catch (IOException L) {
+            System.out.println("Something went wrong...");
+        }
+        catch (NullPointerException yikes){
+            System.out.println("Something went wrong...");
+        }
+
+        
+        
+    }
     
 
 }

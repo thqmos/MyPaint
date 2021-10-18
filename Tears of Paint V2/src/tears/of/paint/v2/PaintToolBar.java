@@ -10,7 +10,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import static java.lang.Integer.parseInt;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -49,8 +53,10 @@ public class PaintToolBar {
     protected static ToggleButton Rounded;
     protected static ToggleButton Eraser;
     protected static ToggleButton Polygon;
-    protected static ToggleButton MovePaste;
+    protected static ToggleButton Cut;
     protected static TextField polytext;
+    protected static ToggleButton Copy;
+    protected static ToggleButton Paste;
     
     protected HBox filllayout;
     protected HBox strokelayout;
@@ -63,18 +69,26 @@ public class PaintToolBar {
     protected VBox textlayout1;
     protected VBox textlayout2;
     protected static VBox textlayout3;
+    protected VBox misclayout;
+    protected VBox tools;
     
     private Label fill;
     private Label stroke;
     private Label slider;
     private Label polynosides;
+    private Label drawt;
+    private Label misc;
     protected static TextField autotext;
     private Button changeauto;
     private String oldString;
     protected static CheckBox check1;
     protected static Label update;
     
+    protected static Label selectedTool;
     
+    /**
+     * THE constructor for the PaintToolBar.
+     */
     public PaintToolBar(){
         
         //Creation of the tool bar
@@ -91,7 +105,9 @@ public class PaintToolBar {
         Polygon = new ToggleButton();
         Rounded = new ToggleButton();
         Eraser = new ToggleButton();
-        MovePaste = new ToggleButton();
+        Cut = new ToggleButton();
+        Copy = new ToggleButton();
+        Paste = new ToggleButton();
         check = new CheckBox("Fill");
         colorGrabber = new ToggleButton();
         textField = new TextField("Enter text here!");
@@ -99,6 +115,7 @@ public class PaintToolBar {
         changeauto = new Button();
         check1 = new CheckBox("Enable Countdown View");
         oldString = "";
+        selectedTool = new Label("Selected Tool: None");
         
         //Autosave stuff
         File f = new File("Resources\\PaintAutoSaveTime.txt");
@@ -171,9 +188,17 @@ public class PaintToolBar {
         String imagee = "Resources\\img_18444.png";
         addIcon(Eraser, imagee);
         
-        //Select and move
-        String images = "Resources\\select-icon-5.png";
-        addIcon(MovePaste, images);
+        //Cut
+        String images = "Resources\\cut.png";
+        addIcon(Cut, images);
+        
+        //Copy
+        String copyi = "Resources\\178921.png";
+        addIcon(Copy, copyi);
+        
+        //Paste
+        String cop = "Resources\\clipboard_paste.png";
+        addIcon(Paste, cop);
         
         //Change autosave time
         String imag = "Resources\\timer_icon_153935.png";
@@ -232,10 +257,10 @@ public class PaintToolBar {
         tooltip9.setTextAlignment(TextAlignment.LEFT);
         colorGrabber.setTooltip(tooltip9);
         
-        //Select and Move tool tooltip
-        Tooltip tooltip10 = new Tooltip("Select and Move Tool!");
+        //Cut tooltip
+        Tooltip tooltip10 = new Tooltip("Cut!");
         tooltip10.setTextAlignment(TextAlignment.LEFT);
-        MovePaste.setTooltip(tooltip10);
+        Cut.setTooltip(tooltip10);
         
         //Eraser tool tooltip
         Tooltip tooltip11 = new Tooltip("Eraser Tool!");
@@ -252,6 +277,16 @@ public class PaintToolBar {
         tooltip13.setTextAlignment(TextAlignment.LEFT);
         changeauto.setTooltip(tooltip13);
         
+        //Copy tooltip
+        Tooltip tooltip14 = new Tooltip("Copy!");
+        tooltip14.setTextAlignment(TextAlignment.LEFT);
+        Copy.setTooltip(tooltip14);
+        
+        //Paste tooltip
+        Tooltip tooltip15 = new Tooltip("Paste!");
+        tooltip15.setTextAlignment(TextAlignment.LEFT);
+        Paste.setTooltip(tooltip15);
+        
         //Creation of the color pickers
         colorPicker = new ColorPicker();
         c22 = new ColorPicker();
@@ -263,12 +298,22 @@ public class PaintToolBar {
         slider = new Label("Width Controller");
         strokelayout = new HBox(colorPicker, stroke);
         filllayout = new HBox(c22, fill);
-        colorLayout = new VBox(strokelayout, filllayout);
-        draw1 = new HBox(LineDrawer, PencilTool, Rectangle, colorGrabber);
-        draw2 = new HBox(Ellipse, Square, Circle, Eraser);
-        draw3 = new HBox(Text, Rounded, Polygon, MovePaste);
-        drawLayout = new VBox(draw1, draw2, draw3);
+        colorLayout = new VBox(strokelayout, filllayout, selectedTool);
+        colorLayout.setSpacing(6);
         
+        draw1 = new HBox(LineDrawer, PencilTool, Rectangle, Ellipse, Square);
+        draw2 = new HBox(Circle, Text, Rounded, Polygon, Eraser);
+        drawt = new Label("Drawing Tools");
+        tools = new VBox(draw1, draw2);
+        drawLayout = new VBox(drawt, tools);
+        drawLayout.setSpacing(13);
+        drawLayout.setAlignment(Pos.BASELINE_CENTER);
+        
+        draw3 = new HBox(colorGrabber, Cut, Copy, Paste, changeauto);
+        misc = new Label("Miscellaneuous Tools");
+        misclayout = new VBox(misc, draw3);
+        misclayout.setSpacing(13);
+        misclayout.setAlignment(Pos.BASELINE_CENTER);
         
         textlayout1 = new VBox(polynosides, polytext);
         textlayout1.setSpacing(6);
@@ -285,8 +330,139 @@ public class PaintToolBar {
         sliderlayout.setAlignment(Pos.BASELINE_CENTER);
         
         //Setting up the tool bar, makes everything look cleaner  
-        tool.getItems().addAll(colorLayout, drawLayout, sliderlayout, check, textField,
-                textlayout1, textlayout3, changeauto, check1);
+        tool.getItems().addAll(colorLayout, check, drawLayout, sliderlayout, textField, misclayout,
+                textlayout1, textlayout3, check1);
+        
+        //What if the line drawer is clicked?
+        LineDrawer.setOnAction(eh -> {
+            selectedTool.setText("Selected Tool: Line Drawer");
+            logTool(" Line Drawer is selected.");
+            if(LineDrawer.isSelected() == false){
+                selectedTool.setText("Selected Tool: None");
+            }
+        });
+        
+        //What if the pencil tool is clicked?
+        PencilTool.setOnAction(eh -> {
+            selectedTool.setText("Selected Tool: Pencil Tool");
+            logTool(" Pencil Tool is selected.");
+            if(PencilTool.isSelected() == false){
+                selectedTool.setText("Selected Tool: None");
+            }
+        });
+        
+        //What if the rectangle tool is clicked?
+        Rectangle.setOnAction(eh -> {
+            selectedTool.setText("Selected Tool: Rectangle Tool");
+            logTool(" Rectangle Tool is selected.");
+            if(Rectangle.isSelected() == false){
+                selectedTool.setText("Selected Tool: None");
+            }
+        });
+        
+        //What if the ellipse tool is clicked?
+        Ellipse.setOnAction(eh -> {
+            selectedTool.setText("Selected Tool: Ellipse Tool");
+            logTool(" Ellipse Tool is selected.");
+            if(Ellipse.isSelected() == false){
+                selectedTool.setText("Selected Tool: None");
+            }
+        });
+        
+        //What if the square tool is clicked?
+        Square.setOnAction(eh -> {
+            selectedTool.setText("Selected Tool: Square Tool");
+            logTool(" Square Tool is selected.");
+            if(Square.isSelected() == false){
+                selectedTool.setText("Selected Tool: None");
+            }
+        });
+        
+        //What if the circle tool is clicked?
+        Circle.setOnAction(eh -> {
+            selectedTool.setText("Selected Tool: Circle Tool");
+            logTool(" Circle Tool is selected.");
+            if(Circle.isSelected() == false){
+                selectedTool.setText("Selected Tool: None");
+            }
+        });
+        
+        //What if the rounded rectangle tool is clicked?
+        Rounded.setOnAction(eh -> {
+            selectedTool.setText("Selected Tool: Rounded Rectangle Tool");
+            logTool(" Rounded Rectangle Tool is selected.");
+            if(Rounded.isSelected() == false){
+                selectedTool.setText("Selected Tool: None");
+            }
+        });
+        
+        //What if the eraser tool is clicked?
+        Eraser.setOnAction(eh -> {
+            selectedTool.setText("Selected Tool: Eraser Tool");
+            logTool(" Eraser Tool is selected.");
+            if(Eraser.isSelected() == false){
+                selectedTool.setText("Selected Tool: None");
+            }
+        });
+        
+        //What if the polygon tool is clicked?
+        Polygon.setOnAction(eh -> {
+            selectedTool.setText("Selected Tool: Polygon Tool");
+            logTool(" Polygon Tool is selected.");
+            if(Polygon.isSelected() == false){
+                selectedTool.setText("Selected Tool: None");
+            }
+        });
+        
+        //What if the cut tool is clicked?
+        Cut.setOnAction(eh -> {
+            selectedTool.setText("Selected Tool: Cut Tool");
+            logTool(" Cut Tool is selected.");
+            if(Cut.isSelected() == false){
+                selectedTool.setText("Selected Tool: None");
+            }
+        });
+        
+        //What if the copy tool is clicked?
+        Copy.setOnAction(eh -> {
+            selectedTool.setText("Selected Tool: Copy Tool");
+            logTool(" Copy Tool is selected.");
+            if(Copy.isSelected() == false){
+                selectedTool.setText("Selected Tool: None");
+            }
+        });
+        
+        //What if the paste tool is clicked?
+        Paste.setOnAction(eh -> {
+            selectedTool.setText("Selected Tool: Paste Tool");
+            logTool(" Paste Tool is selected.");
+            if(Paste.isSelected() == false){
+                selectedTool.setText("Selected Tool: None");
+            }
+        });
+        
+        //What if the color grabber tool is clicked?
+        colorGrabber.setOnAction(eh -> {
+            selectedTool.setText("Selected Tool: Color Grabber");
+            logTool(" Color Grabber is selected.");
+            if(colorGrabber.isSelected() == false){
+                selectedTool.setText("Selected Tool: None");
+            }
+        });
+        
+        //What if the text tool is clicked?
+        Text.setOnAction(eh -> {
+            selectedTool.setText("Selected Tool: Text Tool");
+            logTool(" Text Tool is selected.");
+            if(Text.isSelected() == false){
+                selectedTool.setText("Selected Tool: None");
+            }
+        });
+        
+        //What if the change autosave timer button gets clicked?
+        changeauto.setOnAction(eh -> {
+            logTool(" Autosave time was changed.");
+        });
     }
     
     /**
@@ -349,5 +525,38 @@ public class PaintToolBar {
                 e.printStackTrace();
             }
         }
+    }
+    
+    /**
+     * This is the method which logs the actions being done
+     * @param tool, this is the string that describes what is being used/clicked.
+     */
+    public void logTool(String tool){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+        Date date = new Date(System.currentTimeMillis());
+        formatter.format(date);
+        File fileToBeModified = new File("Resources\\MyPaintLogging.log");
+        FileHandler fh;
+        try {
+            fh = new FileHandler("Resources\\MyPaintLogging.log");
+            PaintCanvas.log.addHandler(fh);
+            SimpleFormatter sf = new SimpleFormatter();  
+            fh.setFormatter(sf);
+            if (PaintCanvas.currentTool != tool) {
+                PaintCanvas.currentTool = tool;
+                PaintCanvas.log.info(date + ":" + PaintCanvas.currentTool);
+            }
+            
+        } catch (SecurityException e) {
+            System.out.println("Something went wrong...");
+        } catch (IOException L) {
+            System.out.println("Something went wrong...");
+        }
+        catch (NullPointerException yikes){
+            System.out.println("Something went wrong...");
+        }
+
+        
+        
     }
 }

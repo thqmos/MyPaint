@@ -27,7 +27,11 @@ public class PaintMenuBar {
     protected static MenuItem Undo;
     protected static MenuItem Redo;
     protected MenuItem Random;
+    protected static MenuItem RainbowFun;
     
+    /**
+     * THE Constructor for the PaintMenuBar.
+     */
     public PaintMenuBar(){
         //Creation of the menu bar
         menuBar = new MenuBar();
@@ -57,6 +61,7 @@ public class PaintMenuBar {
         Undo = new MenuItem("Undo");
         Redo = new MenuItem("Redo");
         Random = new MenuItem("Random Color!");
+        RainbowFun = new MenuItem("Rainbow Fun Mode!");
         File.getItems().add(selectImage);
         File.getItems().add(Save);
         File.getItems().add(SaveAs);
@@ -65,12 +70,14 @@ public class PaintMenuBar {
         File.getItems().add(Redo);
         File.getItems().add(CloseWS);
         Home.getItems().add(Random);
+        Home.getItems().add(RainbowFun);
         View.getItems().add(ZoomOut);
         View.getItems().add(ZoomIn);
         View.getItems().add(Resize);
         Help.getItems().add(HelpM);
         Help.getItems().add(About);
         Help.getItems().add(ReleaseNotes);
+        
         
     }
 }
