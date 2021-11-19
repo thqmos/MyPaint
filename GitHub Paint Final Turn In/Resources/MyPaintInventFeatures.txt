@@ -1,0 +1,10 @@
+My feature:
+
+*	Feature 1: "Rainbow Fun Mode"
+
+	What this does is that it sets each pixel of the canvas to a random color. It can look quite funny and chaotic. 
+	This goes quite well with the color grabber, especially if you want a random color in your color picker.
+
+*	Feature 2: "Random Image"
+
+	What this should do is that it searches a random folder (most likely the "Pictures" folder) and it opens a random image.

@@ -1,0 +1,74 @@
+Nov 19, 2021 11:17:09 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:17:09 CST 2021: Polygon Tool is selected.
+Nov 19, 2021 11:17:13 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:17:13 CST 2021: Rounded Rectangle Tool is selected.
+Nov 19, 2021 11:17:16 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:17:16 CST 2021: Line Drawer is selected.
+Nov 19, 2021 11:17:23 AM tears.of.paint.v2.PaintTab logAction
+INFO: Fri Nov 19 11:17:23 CST 2021: Image opened.
+Nov 19, 2021 11:17:24 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:17:24 CST 2021: Line Drawer is selected.
+Nov 19, 2021 11:17:44 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:17:44 CST 2021: Pencil Tool is selected.
+Nov 19, 2021 11:17:47 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:17:47 CST 2021: Rectangle Tool is selected.
+Nov 19, 2021 11:17:54 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:17:54 CST 2021: Ellipse Tool is selected.
+Nov 19, 2021 11:18:06 AM tears.of.paint.v2.PaintCanvas logAction
+INFO: Fri Nov 19 11:18:06 CST 2021: Something was undone
+Nov 19, 2021 11:18:12 AM tears.of.paint.v2.PaintCanvas logAction
+INFO: Fri Nov 19 11:18:12 CST 2021: Something was redone.
+Nov 19, 2021 11:18:19 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:18:19 CST 2021: Square Tool is selected.
+Nov 19, 2021 11:18:27 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:18:27 CST 2021: Circle Tool is selected.
+Nov 19, 2021 11:18:36 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:18:36 CST 2021: Text Tool is selected.
+Nov 19, 2021 11:18:38 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:18:38 CST 2021: Rounded Rectangle Tool is selected.
+Nov 19, 2021 11:18:41 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:18:41 CST 2021: Polygon Tool is selected.
+Nov 19, 2021 11:18:46 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:18:46 CST 2021: Eraser Tool is selected.
+Nov 19, 2021 11:19:05 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:19:05 CST 2021: Polygon Tool is selected.
+Nov 19, 2021 11:19:24 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:19:24 CST 2021: Color Grabber is selected.
+Nov 19, 2021 11:19:38 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:19:38 CST 2021: Cut Tool is selected.
+Nov 19, 2021 11:19:48 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:19:48 CST 2021: Paste Tool is selected.
+Nov 19, 2021 11:20:00 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:20:00 CST 2021: Copy Tool is selected.
+Nov 19, 2021 11:20:05 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:20:05 CST 2021: Paste Tool is selected.
+Nov 19, 2021 11:20:10 AM tears.of.paint.v2.PaintCanvas logAction
+INFO: Fri Nov 19 11:20:10 CST 2021: Something was undone
+Nov 19, 2021 11:20:13 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:20:13 CST 2021: Paste Tool is selected.
+Nov 19, 2021 11:21:09 AM tears.of.paint.v2.PaintTab logAction
+INFO: Fri Nov 19 11:21:09 CST 2021: Image saved as.
+Nov 19, 2021 11:21:31 AM tears.of.paint.v2.PaintTab logAction
+INFO: Fri Nov 19 11:21:31 CST 2021: Application closed.
+Nov 19, 2021 11:21:38 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:21:38 CST 2021: Line Drawer is selected.
+Nov 19, 2021 11:21:41 AM tears.of.paint.v2.PaintTab logAction
+INFO: Fri Nov 19 11:21:41 CST 2021: Application closed.
+Nov 19, 2021 11:21:49 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:21:49 CST 2021: Autosave time was changed.
+Nov 19, 2021 11:22:12 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:22:12 CST 2021: Rectangle Tool is selected.
+Nov 19, 2021 11:22:25 AM tears.of.paint.v2.PaintCanvas logAction
+INFO: Fri Nov 19 11:22:25 CST 2021: The user zoomed in.
+Nov 19, 2021 11:22:29 AM tears.of.paint.v2.PaintCanvas logAction
+INFO: Fri Nov 19 11:22:29 CST 2021: The user zoomed out.
+Nov 19, 2021 11:22:36 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:22:36 CST 2021: Rectangle Tool is selected.
+Nov 19, 2021 11:22:44 AM tears.of.paint.v2.PaintCanvas logAction
+INFO: Fri Nov 19 11:22:44 CST 2021: The user resized the canvas.
+Nov 19, 2021 11:23:54 AM tears.of.paint.v2.PaintToolBar logTool
+INFO: Fri Nov 19 11:23:54 CST 2021: Eraser Tool is selected.
+Nov 19, 2021 11:24:03 AM tears.of.paint.v2.PaintCanvas logAction
+INFO: Fri Nov 19 11:24:03 CST 2021: Rainbow Fun Mode initiated.
+Nov 19, 2021 11:24:16 AM tears.of.paint.v2.PaintTab logAction
+INFO: Fri Nov 19 11:24:16 CST 2021: Application closed.

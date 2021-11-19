@@ -1,0 +1,145 @@
+
+Tears of Paint Version 1.0
+11/19/2021
+New additions: 
+*	How autosave is being done has now changed. You will do it via a choice box instead of a text field and a button.
+
+Known Issues:
+*	There are no known issues!
+
+Upcoming Additions: 
+* 	The application's functionality is good enough where it does not need any more features. However, the you can submit feedback on my GitHub.
+
+Links:
+*	https://github.com/thqmos/MyPaint
+
+*---------------- Old Versions -----------------*
+Tears of Paint beta 0.6
+10/18/2021
+New additions:
+*	All of the user's actions are now logged in order to formulate a better user experience!
+*	You can now copy selections and paste them (as opposed to cutting. You can still cut too).
+*	There is an indication of which tool is in use!
+*	Rainbow Fun Mode, which makes every pixel a random color, has now been implemented.
+*	More JavaDocs have been added to improve software code quality.
+
+Known Issues:
+*	While you can make tabs, all actions only work on the latest tab. If that tab is deleted, good luck trying to do anything at all.
+
+Upcoming Additions:
+*	The application's functionality is good enough where it does not need any more features. However, the you can submit feedback on my GitHub.
+
+Links:
+*	https://github.com/thqmos/MyPaint
+
+Tears of Paint beta 0.5
+10/8/2021
+New additions:
+*	Autosaving is now enabled, you can enable or disable the countdown! You may also set the time between autosaves.
+*	There are now icons for tools.
+*	There is also mouseover help for controls.
+*	The help menu has been updated and looks better as well.
+*	The software has three unit tests.
+*	Software code quality has been improved with the addition of JavaDocs and a few other changes.
+*	You can make separate tabs for your projects!
+
+Known Issues:
+*	While you can make tabs, actions like saving only work on a particular tab. If that tab is deleted, you can only draw stuff.
+*	While there are unit tests, they do not ensure 100% coverage.
+*	The unit tests are also buggy, as they cause an internal graphics error.
+
+Upcoming Additions:
+*	Copy/Paste
+*	A logging capability that records, in a text file, when saving happens and when the active tool is changed.
+
+Links:
+*	https://github.com/thqmos/MyPaint
+
+Tears of Paint beta 0.4
+10/1/2021
+New Additions:
+*	You can undo/redo!
+*	There is a blank canvas where you can start drawing without having to open an image!
+*	You can now draw rounded rectangles and n-sided polygons (n-gons)!
+*	You can now erase!
+*	Live draw (you can see the drawings as you draw them) has been implemented
+*	You can select a piece of an image and move it!
+*	Application name changed from "MyPaint" to "Tears of Paint".
+
+Known Issues:
+*	While the Help and About options are readable, they are not very pleasing to look at.
+*	Undo can be a little funky, as you may have to undo twice in order to see any changes.
+
+Upcoming Additions:
+*	Fill tool
+*	Being able to open up different projects at the same time via tabs.
+
+Links:
+*	https://github.com/thqmos/MyPaint
+
+MyPaint beta 0.3
+9/24/2021
+New Additions:
+*	You can scribble on your images!
+*	You can adjust the width and color of the lines and scribbles!
+*	You can draw shapes (rectangles, squares, ellipses, circles) with fill!
+*	You get warned before you close if you have not saved.
+*	Keyboard UI Controls are now a thing.
+*	You can open images in multiple file types.
+*	There is a text label describing the color.
+*	You can "grab" color from a specific area.
+*	You can resize the canvas (and the resulting image) and zoom in/out.
+*	You can add text to your masterpieces!
+*	You have an extra tab to practice your drawings!
+
+Known Issues:
+*	While the Help and About options are readable, they are not very pleasing to look at.
+
+Upcoming Additions:
+*	Being able to open up different projects at the same time via tabs.
+*	Undo/Redo
+
+Links:
+*	https://github.com/thqmos/MyPaint
+
+MyPaint beta 0.2
+9/17/2021
+
+New Additions:
+*	You can save your masterpiece!
+*	You can also save as masterpiece!
+*	You can draw a line using the line drawer.
+*	Unintentional cropping of the image is no longer an issue.
+*	When opening an image/drawing on a blank canvas, scroll bars pop up for easier visibility.
+*	You can control the width of the line drawn using the slider.
+*	You can use the color chooser to impact the line drawn.
+*	Help and about options have been added under "Help."
+
+Known Issues:
+*	You still cannot load a new image on top of the image you first selected.
+*	While the Help and About options are readable, they are not very pleasing to look at.
+
+Upcoming additions:
+*	Being able to open up different projects at the same time.
+*	Being able to scribble on your images to create a better masterpiece.
+
+Links:
+*	https://github.com/thqmos/MyPaint
+
+
+MyPaint beta 0.1
+09/10/2021
+
+New additions:
+*	You can now view an image from a file!
+*	You can now choose the image to be opened!
+*	You can utilize our menu bar to do a select few things!
+*	You can close the program without having to worry about your computer breaking!
+
+Known Issues:
+*	You cannot load a new image on top of the image you first selected.
+*	Image is not scaled and centered properly.
+
+Upcoming additions:
+*	Making it more fun by adding more options to customize your image.
+*	Being able to save your projects to any folder.
